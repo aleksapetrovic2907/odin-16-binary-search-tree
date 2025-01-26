@@ -49,6 +49,36 @@ export class BinarySearchTree {
   }
 
   /**
+   * Removes a node with the specified value from the binary search tree.
+   * @param {any} value - The value of the node to remove.
+   * @param {Node} [root=this.root] - The root node of the subtree to search. Defaults to the root of the tree.
+   * @returns {Node|null} The new root node of the subtree after the removal, or `null` if the node is not found.
+   */
+  remove(value, root = this.root) {
+    if (!root) return null;
+
+    if (value < root.value) {
+      root.left = this.remove(value, root.left);
+    } else if (value > root.value) {
+      root.right = this.remove(value, root.right);
+    } else {
+      // Case 1: Node with 1 or less children.
+      if (!root.left) {
+        return root.right;
+      } else if (!root.right) {
+        return root.left;
+      }
+
+      // Case 2: Node with 2 children.
+      const successor = this.getSmallestNode(root.right);
+      root.value = successor.value;
+      root.right = this.remove(successor.value, root.right);
+    }
+
+    return root;
+  }
+
+  /**
    * Finds the node with the smallest value in the given subtree.
    * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
    * @returns {Node} The node with the smallest value in the subtree.
