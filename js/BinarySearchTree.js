@@ -79,6 +79,24 @@ export class BinarySearchTree {
   }
 
   /**
+   * Finds a node with the given value in the binary search tree.
+   * @param {number} value - The value to search for in the tree.
+   * @param {Node} [root=this.root] - The root node to start the search from. Defaults to the root of the tree.
+   * @returns {Node|null} The node with the specified value if found, or null if the value does not exist in the tree.
+   */
+  find(value, root = this.root) {
+    if (!root) return null;
+
+    if (value === root.value) {
+      return root;
+    } else if (value < root.value) {
+      return this.find(value, root.left);
+    } else if (value > root.value) {
+      return this.find(value, root.right);
+    }
+  }
+
+  /**
    * Finds the node with the smallest value in the given subtree.
    * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
    * @returns {Node} The node with the smallest value in the subtree.
