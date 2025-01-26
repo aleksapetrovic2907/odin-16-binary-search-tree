@@ -24,4 +24,27 @@ export class BinarySearchTree {
 
     return root;
   }
+
+  /**
+   * Inserts a new value into the binary search tree.
+   * @param {number} value - The value to insert into the tree.
+   * @param {Node} [root=this.root] - The current node to compare with. Defaults to the root of the tree.
+   * @returns {Node} The root node of the tree after insertion.
+   * @throws {Error} If the value already exists in the tree.
+   */
+  insert(value, root = this.root) {
+    if (!root) {
+      return new Node(value);
+    }
+
+    if (value === root.value) {
+      throw new Error(`The value ${value} already exists in this tree.`);
+    } else if (value < root.value) {
+      root.left = this.insert(value, root.left);
+    } else if (value > root.value) {
+      root.right = this.insert(value, root.right);
+    }
+
+    return root;
+  }
 }
