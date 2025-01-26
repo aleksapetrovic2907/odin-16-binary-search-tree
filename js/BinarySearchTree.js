@@ -47,4 +47,30 @@ export class BinarySearchTree {
 
     return root;
   }
+
+  /**
+   * Finds the node with the smallest value in the given subtree.
+   * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
+   * @returns {Node} The node with the smallest value in the subtree.
+   */
+  getSmallestNode(root = this.root) {
+    while (root.left) {
+      root = root.left;
+    }
+
+    return root;
+  }
+
+  /**
+   * Finds the node with the largest value in the given subtree.
+   * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
+   * @returns {Node} The node with the largest value in the subtree.
+   */
+  getLargestNode(root = this.root) {
+    while (root.right) {
+      root = root.right;
+    }
+
+    return root;
+  }
 }
