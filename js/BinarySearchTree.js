@@ -247,6 +247,30 @@ export class BinarySearchTree {
   }
 
   /**
+   * Calculates the depth of the given node in the binary tree.
+   * @param {Node} node - The node whose depth is to be calculated.
+   *                      If the node is null, the depth is considered -1.
+   * @returns {number} The depth of the given node, or -1 if the node is null.
+   */
+  depth(node) {
+    if (!node) return -1;
+    let currentNode = this.root;
+    let depth = 0;
+
+    while (currentNode !== node) {
+      if (node.value < currentNode.value) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+
+      depth++;
+    }
+
+    return depth;
+  }
+
+  /**
    * Finds the node with the smallest value in the given subtree.
    * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
    * @returns {Node} The node with the smallest value in the subtree.
