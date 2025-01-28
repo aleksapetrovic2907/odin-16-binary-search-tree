@@ -1,5 +1,6 @@
 import { Node } from "./Node.js";
 import { Queue } from "./collections/Queue.js";
+import { Stack } from "./collections/Stack.js";
 
 export class BinarySearchTree {
   /**
@@ -125,6 +126,38 @@ export class BinarySearchTree {
       }
       if (node.right) {
         queue.enqueue(node.right);
+      }
+    }
+  }
+
+  /**
+   * Performs a preorder traversal of the binary tree, starting from the given root node or the tree's root by default.
+   * The traversal visits the node first, then recursively visits the left subtree, followed by the right subtree.
+   * If the root is null or undefined, the method returns immediately without doing anything.
+   *
+   * @param {function} callback - A function to execute on each node during traversal.
+   *                              The callback receives the current node as an argument.
+   * @param {object} [root=this.root] - The starting node for the traversal. Defaults to the tree's root.
+   * @throws {Error} Throws an error if the callback is not a function.
+   */
+  preOrder(callback, root = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required in order to traverse.");
+    }
+    if (!root) return;
+
+    const stack = new Stack();
+    stack.push(root);
+
+    while (!stack.isEmpty) {
+      const node = stack.pop();
+      callback(node);
+
+      if (node.right) {
+        stack.push(node.right);
+      }
+      if (node.left) {
+        stack.push(node.left);
       }
     }
   }
