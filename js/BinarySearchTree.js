@@ -241,9 +241,9 @@ export class BinarySearchTree {
    *                      If the node is null, the height is considered -1.
    * @returns {number} The height of the given node, or -1 if the node is null.
    */
-  height(root = this.root) {
-    if (!root) return -1;
-    return 1 + Math.max(this.height(root.left), this.height(root.right));
+  height(node = this.root) {
+    if (!node) return -1;
+    return 1 + Math.max(this.height(node.left), this.height(node.right));
   }
 
   /**
