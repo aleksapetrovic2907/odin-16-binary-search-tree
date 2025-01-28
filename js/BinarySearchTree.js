@@ -1,4 +1,5 @@
 import { Node } from "./Node.js";
+import { Queue } from "./collections/Queue.js";
 
 export class BinarySearchTree {
   /**
@@ -93,6 +94,38 @@ export class BinarySearchTree {
       return this.find(value, root.left);
     } else if (value > root.value) {
       return this.find(value, root.right);
+    }
+  }
+
+  /**
+   * Performs a level-order (breadth-first) traversal of the binary tree,
+   * starting from the given root node or the tree's root by default.
+   * If the root is null or undefined, the method returns immediately without doing anything.
+   *
+   * @param {function} callback - A function to execute on each node during traversal.
+   *                              The callback receives the current node as an argument.
+   * @param {object} [root=this.root] - The starting node for the traversal. Defaults to the tree's root.
+   * @throws {Error} Throws an error if the callback is not a function.
+   */
+  levelOrder(callback, root = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required in order to traverse.");
+    }
+    if (!root) return;
+
+    const queue = new Queue();
+    queue.enqueue(root);
+
+    while (!queue.isEmpty) {
+      const node = queue.dequeue();
+      callback(node);
+
+      if (node.left) {
+        queue.enqueue(node.left);
+      }
+      if (node.right) {
+        queue.enqueue(node.right);
+      }
     }
   }
 
