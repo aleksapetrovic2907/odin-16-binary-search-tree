@@ -236,6 +236,17 @@ export class BinarySearchTree {
   }
 
   /**
+   * Calculates the height of the given node in the binary tree.
+   * @param {Node} node - The node whose height is to be calculated.
+   *                      If the node is null, the height is considered -1.
+   * @returns {number} The height of the given node, or -1 if the node is null.
+   */
+  height(root = this.root) {
+    if (!root) return -1;
+    return 1 + Math.max(this.height(root.left), this.height(root.right));
+  }
+
+  /**
    * Finds the node with the smallest value in the given subtree.
    * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
    * @returns {Node} The node with the smallest value in the subtree.
