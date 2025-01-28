@@ -271,6 +271,16 @@ export class BinarySearchTree {
   }
 
   /**
+   * Rebalances the tree by performing an in-order traversal, extracting the values of the nodes,
+   * and using these values to rebuild the tree.
+   */
+  rebalance() {
+    const values = [];
+    this.inOrder((node) => values.push(node.value));
+    this.#buildTree(values);
+  }
+
+  /**
    * Finds the node with the smallest value in the given subtree.
    * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
    * @returns {Node} The node with the smallest value in the subtree.
