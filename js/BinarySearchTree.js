@@ -163,6 +163,40 @@ export class BinarySearchTree {
   }
 
   /**
+   * Performs an in-order traversal of the binary tree, processing each node in the order:
+   * left child, current node, right child.
+   *
+   * @param {function} callback - The function to be called with each node during the traversal.
+   *                               The callback will receive the current node as its argument.
+   * @param {Node} [root=this.root] - The root node of the tree or subtree to begin the traversal from.
+   *                                  If not provided, the traversal starts from the root of the tree.
+   *
+   * @throws {Error} Throws an error if the provided callback is not a function.
+   */
+  inOrder(callback, root = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("A callback is required in order to traverse.");
+    }
+
+    if (!root) return;
+
+    const stack = new Stack();
+    let currentNode = root;
+
+    while (currentNode || !stack.isEmpty) {
+      while (currentNode) {
+        stack.push(currentNode);
+        currentNode = currentNode.left;
+      }
+
+      currentNode = stack.pop();
+      callback(currentNode);
+
+      currentNode = currentNode.right;
+    }
+  }
+
+  /**
    * Finds the node with the smallest value in the given subtree.
    * @param {Node} root - The root node of the subtree to search. Defaults to the root of the tree.
    * @returns {Node} The node with the smallest value in the subtree.
