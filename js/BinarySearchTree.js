@@ -277,7 +277,7 @@ export class BinarySearchTree {
   rebalance() {
     const values = [];
     this.inOrder((node) => values.push(node.value));
-    this.#buildTree(values);
+    this.root = this.#buildTree(values);
   }
 
   /**
