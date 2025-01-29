@@ -271,6 +271,24 @@ export class BinarySearchTree {
   }
 
   /**
+   * Checks if the binary search tree is balanced.
+   * @param {Node} [node=this.root] - The root of the subtree to check. Defaults to the tree's root.
+   * @returns {boolean} - Returns `true` if the tree is balanced, otherwise `false`.
+   */
+  isBalanced(root = this.root) {
+    if (!root) return true;
+
+    const leftHeight = this.height(root.left);
+    const rightHeight = this.height(root.right);
+
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return false;
+    }
+
+    return this.isBalanced(root.left) && this.isBalanced(root.right);
+  }
+
+  /**
    * Rebalances the tree by performing an in-order traversal, extracting the values of the nodes,
    * and using these values to rebuild the tree.
    */
